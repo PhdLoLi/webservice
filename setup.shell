@@ -1,0 +1,8 @@
+service iptables stop
+/home/dev/impala/thirdparty/hadoop-2.0.0-cdh4.3.0/sbin/start-dfs.sh
+cd /root/hivelog
+nohup hive --service metastore >logs 2>&1 &
+cd /root/statestorelog
+nohup /home/dev/impala/be/build/debug/statestore/statestored -state_store_port=24000 >logs 2>&1 &
+cd /root/impaladlog
+nohup /home/dev/impala/bin/start-impalad.sh -state_store_host=master >logs 2>&1 &
